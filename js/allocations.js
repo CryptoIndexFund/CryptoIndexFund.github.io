@@ -1,8 +1,10 @@
 // Get price data
 const url = 'https://api.coinmarketcap.com/v2/ticker/?limit=10';
 fetch(url)
-    .then(data=>{return data.json()})
-    .then(res=>{
+    .then(function(data) {
+        return data.json();
+    })
+    .then(function(res) {
         // Convert object to sorted array
         var raw = res.data,
             sorted = Object.keys(raw).sort(function(a, b) {
@@ -49,4 +51,6 @@ fetch(url)
             });
         });
     })
-    .catch(error=>console.log(error))
+    .catch(function(error) {
+        console.log(error);
+    });
