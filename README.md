@@ -1,2 +1,2 @@
 # CryptoIndexFund
-Crytocurrency Index Fund target allocations
+Cryptocurrency Index Fund target allocations
