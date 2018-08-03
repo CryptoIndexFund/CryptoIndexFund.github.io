@@ -4,8 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cryptocurrency Index Fund</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 </head>
 <body>
-    <h1>Cryptocurrency Index Fund</h1>
+    <div class="container">
+        <h1>Cryptocurrency Index Fund</h1>
+        <table id="myTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Market Capitalization</th>
+                    <th>Index Allocation</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="js/allocations.js"></script>
 </body>
 </html>
