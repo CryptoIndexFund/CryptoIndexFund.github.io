@@ -1,18 +1,12 @@
 // Get price data
-const url = 'https://api.coinmarketcap.com/v2/ticker/?limit=10';
+const url = 'https://api.coinmarketcap.com/v2/ticker/?limit=10&structure=array';
 fetch(url)
     .then(function(data) {
         return data.json();
     })
     .then(function(res) {
-        // Convert object to sorted array
-        var raw = res.data,
-            sorted = Object.keys(raw).sort(function(a, b) {
-            return raw[a].rank - raw[b].rank;
-        }).map(function(sortedKey) {
-            return raw[sortedKey];
-        });
-
+        var sorted = res.data;
+        
         // Access quotes
         sorted.forEach(function(obj) {
             obj.price = obj.quotes.USD.price;
@@ -38,11 +32,11 @@ fetch(url)
             $('#myTable').DataTable({
                 data: sorted,
                 columns: [
-                    {data: 'symbol', title: 'Symbol'},
-                    {data: 'name', title: 'Name'},
-                    {data: 'price', title: 'Price', render: rendernumber(3), className: 'dt-body-right'},
-                    {data: 'cap', title: 'Market Capitalization', render: rendernumber(0), className: 'dt-body-right'},
-                    {data: 'allocation', title: 'Index Allocation', render: rendernumber(4), className: 'dt-body-right'}
+                    {data: 'symbol'},
+                    {data: 'name'},
+                    {data: 'price', render: rendernumber(3), className: 'dt-right'},
+                    {data: 'cap', render: rendernumber(0), className: 'dt-right'},
+                    {data: 'allocation', render: rendernumber(4), className: 'dt-right'}
                 ],
                 ordering: false,
                 paging: false,
