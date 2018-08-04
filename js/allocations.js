@@ -24,9 +24,6 @@ fetch(url)
         });
 
         // Update the datatable
-        function rendernumber(digits) {
-            return $.fn.dataTable.render.number(',', '.', digits, '');
-        }
         $(document).ready( function () {
             var tabledata = []
             $('#myTable').DataTable({
@@ -34,9 +31,9 @@ fetch(url)
                 columns: [
                     {data: 'symbol'},
                     {data: 'name'},
-                    {data: 'price', render: rendernumber(3), className: 'dt-right'},
-                    {data: 'cap', render: rendernumber(0), className: 'dt-right'},
-                    {data: 'allocation', render: rendernumber(4), className: 'dt-right'}
+                    {data: 'price', render: renderPrice, className: 'dt-right'},
+                    {data: 'cap', render: renderCap, className: 'dt-right'},
+                    {data: 'allocation', render: renderAllo, className: 'dt-right'}
                 ],
                 ordering: false,
                 paging: false,
@@ -48,3 +45,19 @@ fetch(url)
     .catch(function(error) {
         console.log(error);
     });
+
+function renderPrice(price) {
+	if (price < 1) {
+    	return '$' + price.toFixed(4);
+    } else {
+    	return '$' + price.toFixed(2);
+    }
+}
+
+function renderCap(cap) {
+	return '$' + (cap / 1e9).toFixed(2) + 'B';
+}
+
+function renderAllo(allo) {
+	return (allo * 100).toFixed(2) + '%';
+}
