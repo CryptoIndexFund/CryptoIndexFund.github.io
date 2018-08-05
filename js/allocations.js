@@ -55,7 +55,7 @@ function renderPrice(price) {
 }
 
 function renderCap(cap) {
-	return '$' + (cap / 1e9).toFixed(2) + ' B';
+	return '$' + (cap / 1e9).toFixed(2) + '&nbsp;B';
 }
 
 function renderAllo(allo) {
