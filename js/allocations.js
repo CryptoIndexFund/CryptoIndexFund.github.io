@@ -26,6 +26,8 @@ fetch(url)
                     {data: 'quotes.USD.price', render: renderPrice, className: 'dt-right'},
                     {data: 'quotes.USD.market_cap', render: renderCap, className: 'dt-right'},
                     {data: 'allocation', render: renderAllo, className: 'dt-right'},
+                    {data: 'quotes.USD.percent_change_24h', render: renderChange, className: 'dt-right'},
+                    {data: 'quotes.USD.percent_change_7d', render: renderChange, className: 'dt-right'}
                 ],
                 ordering: false,
                 paging: false,
@@ -66,4 +68,8 @@ function renderCap(cap) {
 
 function renderAllo(allo) {
 	return (allo * 100).toFixed(2) + '%';
+}
+
+function renderChange(change) {
+	return change.toFixed(2) + '%';
 }
