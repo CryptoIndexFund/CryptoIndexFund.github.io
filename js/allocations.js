@@ -21,8 +21,8 @@ fetch(url)
             $('#myTable').DataTable({
                 data: res.data,
                 columns: [
-                    {data: 'symbol'},
                     {data: 'name'},
+                    {data: 'symbol'},
                     {data: 'quotes.USD.price', render: renderPrice, className: 'dt-right'},
                     {data: 'quotes.USD.market_cap', render: renderCap, className: 'dt-right'},
                     {data: 'allocation', render: renderAllo, className: 'dt-right'},
