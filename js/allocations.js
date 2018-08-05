@@ -47,15 +47,29 @@ fetch(url)
     });
 
 function renderPrice(price) {
-	if (price < 1) {
-    	return '$' + price.toFixed(4);
-    } else {
-    	return '$' + price.toFixed(2);
-    }
+	var options = {
+        style: 'currency',
+        currency: 'USD'
+    };
+    return price.toLocaleString(undefined, options);
 }
 
 function renderCap(cap) {
-	return '$' + (cap / 1e9).toFixed(2) + '&nbsp;B';
+	var si = [
+        { value: 1, symbol: '' },
+        { value: 1E3, symbol: 'K' },
+        { value: 1E6, symbol: 'M' },
+        { value: 1E9, symbol: 'B' },
+        { value: 1E12, symbol: 'T' },
+        { value: 1E15, symbol: 'P' },
+        { value: 1E18, symbol: 'E' }
+    ];
+    for (var i = si.length - 1; i > 0; i--) {
+        if (cap >= si[i].value) {
+            break;
+        }
+    }
+	return renderPrice(cap / si[i].value) + '&nbsp;' + si[i].symbol;
 }
 
 function renderAllo(allo) {
