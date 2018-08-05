@@ -2,3 +2,11 @@ table.dataTable thead th {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
