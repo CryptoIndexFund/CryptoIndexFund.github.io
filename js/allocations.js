@@ -5,35 +5,27 @@ fetch(url)
         return data.json();
     })
     .then(function(res) {
-        var sorted = res.data;
-        
-        // Access quotes
-        sorted.forEach(function(obj) {
-            obj.price = obj.quotes.USD.price;
-            obj.cap = obj.quotes.USD.market_cap;
-        });
-
         // Calculate total market cap
-        var total_cap = sorted.reduce(function(acc, obj) {
-            return acc + obj.cap;
+        var total_cap = res.data.reduce(function(acc, obj) {
+            return acc + obj.quotes.USD.market_cap;
         }, 0);
 
         // Calculate index allocation
-        sorted.forEach(function(obj) {
-            obj.allocation = obj.cap / total_cap;
+        res.data.forEach(function(obj) {
+            obj.allocation = obj.quotes.USD.market_cap / total_cap;
         });
 
         // Update the datatable
         $(document).ready( function () {
             var tabledata = []
             $('#myTable').DataTable({
-                data: sorted,
+                data: res.data,
                 columns: [
                     {data: 'symbol'},
                     {data: 'name'},
-                    {data: 'price', render: renderPrice, className: 'dt-right'},
-                    {data: 'cap', render: renderCap, className: 'dt-right'},
-                    {data: 'allocation', render: renderAllo, className: 'dt-right'}
+                    {data: 'quotes.USD.price', render: renderPrice, className: 'dt-right'},
+                    {data: 'quotes.USD.market_cap', render: renderCap, className: 'dt-right'},
+                    {data: 'allocation', render: renderAllo, className: 'dt-right'},
                 ],
                 ordering: false,
                 paging: false,
