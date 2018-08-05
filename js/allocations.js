@@ -41,7 +41,7 @@ fetch(url)
     });
 
 function renderPrice(price) {
-	var options = {
+    var options = {
         style: 'currency',
         currency: 'USD'
     };
@@ -49,27 +49,25 @@ function renderPrice(price) {
 }
 
 function renderCap(cap) {
-	var si = [
-        { value: 1, symbol: '' },
-        { value: 1E3, symbol: 'K' },
-        { value: 1E6, symbol: 'M' },
-        { value: 1E9, symbol: 'B' },
-        { value: 1E12, symbol: 'T' },
-        { value: 1E15, symbol: 'P' },
-        { value: 1E18, symbol: 'E' }
+    var si = [
+        {value: 1, symbol: ''},
+        {value: 1e3, symbol: 'K'},
+        {value: 1e6, symbol: 'M'},
+        {value: 1e9, symbol: 'B'},
+        {value: 1e12, symbol: 'T'},
+        {value: 1e15, symbol: 'P'},
+        {value: 1e18, symbol: 'E'}
     ];
     for (var i = si.length - 1; i > 0; i--) {
-        if (cap >= si[i].value) {
-            break;
-        }
+        if (cap >= si[i].value) { break; }
     }
-	return renderPrice(cap / si[i].value) + '&nbsp;' + si[i].symbol;
+    return renderPrice(cap / si[i].value) + '&nbsp;' + si[i].symbol;
 }
 
 function renderAllo(allo) {
-	return (allo * 100).toFixed(2) + '%';
+    return (allo * 100).toFixed(2) + '%';
 }
 
 function renderChange(change) {
-	return change.toFixed(2) + '%';
+    return change.toFixed(2) + '%';
 }
