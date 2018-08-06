@@ -50,7 +50,7 @@ fetch(url)
                 }
             });
             
-            table.columns.adjust().draw();
+            table.columns.adjust();
         });
     })
     .catch(function(error) {
