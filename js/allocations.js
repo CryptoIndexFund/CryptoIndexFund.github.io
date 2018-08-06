@@ -48,9 +48,7 @@ fetch(url)
                     	$(row).find('td:eq(6)').addClass('red');
                     }
                 }
-            });
-            
-            $('#myTable').DataTable().draw();
+            }).columns.adjust().draw();
         });
     })
     .catch(function(error) {
