@@ -17,7 +17,6 @@ fetch(url)
 
         // Update the datatable
         $(document).ready( function () {
-            var tabledata = []
             $('#myTable').DataTable({
                 data: res.data,
                 columns: [
@@ -50,6 +49,8 @@ fetch(url)
                     }
                 }
             });
+            
+            $('#myTable').DataTable().draw();
         });
     })
     .catch(function(error) {
