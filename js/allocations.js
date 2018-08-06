@@ -33,6 +33,7 @@ fetch(url)
                 paging: false,
                 info: false,
                 searching: false,
+                scrollX: true,
                 rowCallback: function(row, data, index) {
                 	var val = data.quotes.USD.percent_change_24h;
                     if (val > 0) {
