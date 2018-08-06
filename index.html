@@ -52,11 +52,9 @@
 
     <!-- Support old browsers -->
     <script type="text/javascript">
-        var ua = window.navigator.userAgent,
-            msie = ua.indexOf("MSIE ");
-        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-            document.write('<script src=cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js;\/scr'+'ipt>');
-            document.write('<script src=cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js;\/scr'+'ipt>');
+        if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"><\/script>');
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"><\/script>');
         }
     </script>
 
