@@ -17,7 +17,7 @@ fetch(url)
 
         // Update the datatable
         $(document).ready( function () {
-            $('#myTable').DataTable({
+            var table = $('#myTable').DataTable({
                 data: res.data,
                 columns: [
                     {data: 'name'},
@@ -48,7 +48,9 @@ fetch(url)
                     	$(row).find('td:eq(6)').addClass('red');
                     }
                 }
-            }).columns.adjust().draw();
+            });
+            
+            table.columns.adjust().draw();
         });
     })
     .catch(function(error) {
