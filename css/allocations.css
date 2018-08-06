@@ -10,3 +10,7 @@ table.dataTable thead th {
 .green {
     color: green;
 }
+
+#donate-btc {
+    padding-right: 5px;
+}
