@@ -24,7 +24,7 @@ fetch(url)
         });
         price /= 7.8e9;  // normalized to 10 on 2018-08-06
         $('#price').text(renderPrice(price));
-        $('#change-1d').text(renderChange(change_1d));
+        $('#change-1d').text('(' + renderChange(change_1d) + ')');
         if (change_1d > 0) {
             $('#change-1d').addClass('green');
         } else if (change_1d < 0) {
