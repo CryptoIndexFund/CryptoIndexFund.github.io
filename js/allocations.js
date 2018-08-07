@@ -27,9 +27,9 @@ fetch(url)
 
         // Update index price and change
         var price = 0,
-        	change_1d = 0;
+            change_1d = 0;
         res.data.forEach(function(obj) {
-        	price += obj.allocation * obj.quotes.USD.market_cap;
+            price += obj.allocation * obj.quotes.USD.market_cap;
             change_1d += obj.allocation * obj.quotes.USD.percent_change_24h;
         });
         price /= 7.8e9;  // normalized to 10 on 2018-08-06
@@ -60,18 +60,18 @@ fetch(url)
                 searching: false,
                 scrollX: true,
                 rowCallback: function(row, data, index) {
-                	var val = data.quotes.USD.percent_change_24h;
+                    var val = data.quotes.USD.percent_change_24h;
                     if (val > 0) {
-                    	$(row).find('td:eq(5)').addClass('green');
+                        $(row).find('td:eq(5)').addClass('green');
                     } else if (val < 0) {
-                    	$(row).find('td:eq(5)').addClass('red');
+                        $(row).find('td:eq(5)').addClass('red');
                     }
 
                     val = data.quotes.USD.percent_change_7d;
                     if (val > 0) {
-                    	$(row).find('td:eq(6)').addClass('green');
+                        $(row).find('td:eq(6)').addClass('green');
                     } else if (val < 0) {
-                    	$(row).find('td:eq(6)').addClass('red');
+                        $(row).find('td:eq(6)').addClass('red');
                     }
                 }
             });
