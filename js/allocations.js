@@ -1,10 +1,20 @@
 // Get price data
-const url = 'https://api.coinmarketcap.com/v2/ticker/?limit=10&structure=array';
+const skip_symbols = new Set(['USDT', 'BNB', 'OMG']),
+    n_symbols = 10 + skip_symbols.size,
+    url = 'https://api.coinmarketcap.com/v2/ticker/?limit=' + n_symbols + '&structure=array';
 fetch(url)
     .then(function(data) {
         return data.json();
     })
     .then(function(res) {
+        // Skip symbols
+        var i = n_symbols;
+        while (i--) {
+            if (skip_symbols.has(res.data[i].symbol)) {
+                res.data.splice(i, 1);
+            }
+        }
+
         // Calculate total market cap
         var total_cap = res.data.reduce(function(acc, obj) {
             return acc + obj.quotes.USD.market_cap;
