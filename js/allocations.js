@@ -15,6 +15,9 @@ fetch(url)
             }
         }
 
+        // Slice to 10
+        res.data = res.data.slice(0, 10);
+
         // Calculate total market cap
         var total_cap = res.data.reduce(function(acc, obj) {
             return acc + obj.quotes.USD.market_cap;
