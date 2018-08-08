@@ -29,13 +29,12 @@ fetch(url)
         });
 
         // Update index price and change
-        var price = 0,
+        var SCALING = 2e10,
+            price = total_cap / SCALING,
             change_1d = 0;
         res.data.forEach(function(obj) {
-            price += obj.allocation * obj.quotes.USD.market_cap;
             change_1d += obj.allocation * obj.quotes.USD.percent_change_24h;
         });
-        price /= 7.8e9;  // normalized to 10 on 2018-08-06
         $('#price').text(renderPrice(price));
         $('#change-1d').text('(' + renderChange(change_1d) + ')');
         if (change_1d > 0) {
