@@ -35,6 +35,11 @@ new Vue({
                 // Calculate index allocation
                 res.data.forEach(function(obj) {
                     obj.allocation = obj.quotes.USD.market_cap / total_cap;
+
+                    // Fix some names
+                    if (obj.name == 'XRP') {
+                        obj.name = 'Ripple';
+                    }
                 });
 
                 // Calculate index price and change
