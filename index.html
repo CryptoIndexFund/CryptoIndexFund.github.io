@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crypto Index Fund</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/allocations.css">
 </head>
 <body>
@@ -18,39 +17,58 @@
 
     <!-- Page Content -->
     <div class="container">
-        <div class="row">
+        <div id="app" class="row">
             <div class="col">
-                <span id="price"></span>
-                <span id="change-1d"></span>
+                <span id="price">
+                    {{ formatPrice(price) }}
+                </span>
+                <span id="change-1d" :class="{green: change_1d > 0, red: change_1d < 0}">
+                    ({{ formatPercent(change_1d) }})
+                </span>
                 <p>
                     A cryptocurrency index fund of the top 10 coins.
                 </p>
-                <table id="myTable" class="table table-hover" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Symbol</th>
-                            <th>Price</th>
-                            <th>Market Cap</th>
-                            <th>Allocation</th>
-                            <th>Change (1d)</th>
-                            <th>Change (7d)</th>
-                        </tr>
-                    </thead>
-                </table>
-                <a class="github-button"
-                   href="https://github.com/CryptoIndexFund/CryptoIndexFund.github.io"
-                   aria-label="View CryptoIndexFund on GitHub">View on GitHub</a>
+                <div class="table-responsive">
+                    <table id="myTable" class="table table-hover table-striped" width="100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Symbol</th>
+                                <th scope="col" class="text-right">Price</th>
+                                <th scope="col" class="text-right">Market Cap</th>
+                                <th scope="col" class="text-right">Allocation</th>
+                                <th scope="col" class="text-right">Change (1d)</th>
+                                <th scope="col" class="text-right">Change (7d)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="crypto in cryptos">
+                                <th scope="row">{{ crypto.id }}</th>
+                                <td>{{ crypto.name }}</td>
+                                <td>{{ crypto.symbol }}</td>
+                                <td class="text-right">{{ formatPrice(crypto.price) }}</td>
+                                <td class="text-right">{{ formatCap(crypto.cap) }}</td>
+                                <td class="text-right">{{ formatAllocation(crypto.allocation ) }}</td>
+                                <td class="text-right" :class="{green: crypto.change1d > 0, red: crypto.change1d < 0}">{{ formatPercent(crypto.change1d) }}</td>
+                                <td class="text-right" :class="{green: crypto.change7d > 0, red: crypto.change7d < 0}">{{ formatPercent(crypto.change7d) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="form-inline">
-            <div id="donate-btc"></div>
-            <div id="donate-eth"></div>
+
+        <div class="row">
+            <div class="col">
+                <a class="github-button" href="https://github.com/CryptoIndexFund/CryptoIndexFund.github.io" aria-label="View CryptoIndexFund on GitHub">View on GitHub</a>
+                <div class="form-inline">
+                    <div id="donate-btc"></div>
+                    <div id="donate-eth"></div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <!-- Support old browsers -->
     <script type="text/javascript">
