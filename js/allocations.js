@@ -65,6 +65,15 @@ new Vue({
                         change7d: crypto.quotes.USD.percent_change_7d
                     };
                 })
+
+                // Create the chart
+                let coins = that.cryptos.map(function(crypto) {
+                        return crypto.symbol;
+                    }),
+                	caps = that.cryptos.map(function(crypto) {
+                    	return crypto.cap;
+                    });
+                createChart(coins, caps);
             })
             .catch(function(error) {
                 console.log(error);
@@ -103,3 +112,124 @@ new Vue({
         }
     }
 })
+
+createChart = function(coins, caps) {
+	const colors = [
+        '#8dd3c7',
+        '#ffffb3',
+        '#bebada',
+        '#fb8072',
+        '#80b1d3',
+        '#fdb462',
+        '#b3de69',
+        '#fccde5',
+        '#d9d9d9',
+        '#bc80bd'
+	];
+    
+    let requests = coins.map(function(coin) {
+        if (coin == 'MIOTA') {
+            coin = 'IOTA';
+        }
+        let url = 'https://min-api.cryptocompare.com/data/histoday?fsym=' + coin + '&tsym=USD&limit=30&e=CCCAGG&extraParams=CryptoIndexFund';
+        return fetch(url).then(function(response) {
+            return response.json();
+        });
+    });
+    
+    Promise.all(requests)
+        .then(function(datas) {
+            let datasets = [];
+            
+            // Calculate the index performance
+            // assumes all datas share the same datetimes
+            let datetimes = datas[0].Data.map(function(x) {
+                    return x.time * 1000;
+                }),
+                indexCap = datetimes.map(function(x) {
+                	return 0;
+                });
+            datas.forEach(function(data, index) {
+            	let latestPrice = data.Data[data.Data.length - 1].close;
+                data.Data.forEach(function(prices, time) {
+                	indexCap[time] += caps[index] * prices.close / latestPrice;
+                });
+            });
+            let cap0 = indexCap[0];
+            datasets.push({
+            	label: 'Index',
+                data: indexCap.map(function(x, index) {
+                	return {
+                    	x: datetimes[index],
+                    	y: (x - cap0) / cap0 * 100
+                    };
+                }),
+                borderColor: 'black',
+                backgroundColor: 'black',
+                fill: false,
+                showLine: true,
+                //lineTension: 0
+            });
+            
+            // Add the individual coin performance
+            datas.forEach(function(data, index) {
+                let price0 = data.Data[0].close;
+                datasets.push({
+                    label: coins[index],
+                    data: data.Data.map(function(x) {
+                        let price = x.close;
+                        return {
+                            x: x.time * 1000,
+                            y: (price - price0) / price0 * 100
+                        };
+                    }),
+                    borderColor: colors[index],
+                    backgroundColor: colors[index],
+                    fill: false,
+                    showLine: true,
+                    //lineTension: 0
+                });
+            });
+            let config = {
+                type: 'scatter',
+                data: {
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    tooltips: {
+                        callbacks: {
+                            title: function(tooltipItem, data) {
+                                console.log(tooltipItem);
+                                let tooltip = tooltipItem[0],
+                                    coin = coins[tooltip.datasetIndex - 1] || 'Index',
+                                    title = [tooltip.xLabel, coin];
+                                return title;
+                            },
+                            label: function(tooltipItem, data) {
+                                return tooltipItem.yLabel.toFixed(2) + '%';
+                            }
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'time'
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }]
+                    }
+                }
+            };
+
+            let ctx = document.getElementById('mychart').getContext('2d');
+            new Chart(ctx, config);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+}
