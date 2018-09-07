@@ -22,14 +22,14 @@
                 <span id="price">
                     {{ formatPrice(price) }}
                 </span>
-                <span id="change-1d" :class="{green: change_1d > 0, red: change_1d < 0}">
+                <span :class="{green: change_1d > 0, red: change_1d < 0}">
                     ({{ formatPercent(change_1d) }})
                 </span>
                 <p>
                     A cryptocurrency index fund of the top 10 coins.
                 </p>
                 <div class="table-responsive">
-                    <table id="myTable" class="table table-hover table-striped" width="100%">
+                    <table class="table table-hover table-striped" width="100%">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
