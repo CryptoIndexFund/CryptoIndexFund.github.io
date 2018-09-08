@@ -196,7 +196,7 @@ createChart = function(coins, caps) {
                     datasets: datasets
                 },
                 options: {
-                    responsive: true,
+                    maintainAspectRatio: false,
                     tooltips: {
                         callbacks: {
                             title: function(tooltipItem, data) {
