@@ -197,6 +197,11 @@ createChart = function(coins, caps) {
                 },
                 options: {
                     maintainAspectRatio: false,
+                    title: {
+                        display: true,
+                        position: 'bottom',
+                        text: 'Historical prices from CryptoCompare.com'
+                    }
                     tooltips: {
                         callbacks: {
                             title: function(tooltipItem, data) {
