@@ -222,6 +222,13 @@ createChart = function(coins, caps) {
                                 }
                             }
                         }]
+                    },
+                    elements: {
+                        point: {
+                            radius: 0,
+                            hitRadius: 10,
+                            hoverRadius: 5
+                        }
                     }
                 }
             };
