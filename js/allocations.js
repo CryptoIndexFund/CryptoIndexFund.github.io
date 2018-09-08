@@ -70,8 +70,8 @@ new Vue({
                 let coins = that.cryptos.map(function(crypto) {
                         return crypto.symbol;
                     }),
-                	caps = that.cryptos.map(function(crypto) {
-                    	return crypto.cap;
+                    caps = that.cryptos.map(function(crypto) {
+                        return crypto.cap;
                     });
                 createChart(coins, caps);
             })
@@ -114,7 +114,7 @@ new Vue({
 })
 
 createChart = function(coins, caps) {
-	const colors = [
+    const colors = [
         '#8dd3c7',
         '#ffffb3',
         '#bebada',
@@ -125,7 +125,7 @@ createChart = function(coins, caps) {
         '#fccde5',
         '#d9d9d9',
         '#bc80bd'
-	];
+    ];
     
     let requests = coins.map(function(coin) {
         if (coin == 'MIOTA') {
@@ -147,21 +147,21 @@ createChart = function(coins, caps) {
                     return x.time * 1000;
                 }),
                 indexCap = datetimes.map(function(x) {
-                	return 0;
+                    return 0;
                 });
             datas.forEach(function(data, index) {
-            	let latestPrice = data.Data[data.Data.length - 1].close;
+                let latestPrice = data.Data[data.Data.length - 1].close;
                 data.Data.forEach(function(prices, time) {
-                	indexCap[time] += caps[index] * prices.close / latestPrice;
+                    indexCap[time] += caps[index] * prices.close / latestPrice;
                 });
             });
             let cap0 = indexCap[0];
             datasets.push({
-            	label: 'Index',
+                label: 'Index',
                 data: indexCap.map(function(x, index) {
-                	return {
-                    	x: datetimes[index],
-                    	y: (x - cap0) / cap0 * 100
+                    return {
+                        x: datetimes[index],
+                        y: (x - cap0) / cap0 * 100
                     };
                 }),
                 borderColor: 'black',
