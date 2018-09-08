@@ -213,7 +213,10 @@ createChart = function(coins, caps) {
                     },
                     scales: {
                         xAxes: [{
-                            type: 'time'
+                            type: 'time',
+                            time: {
+                                tooltipFormat: 'MMM D'
+                            }
                         }],
                         yAxes: [{
                             ticks: {
