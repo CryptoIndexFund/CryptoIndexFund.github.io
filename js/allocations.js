@@ -3,6 +3,7 @@ new Vue({
     data: {
         price: 10,
         change_1d: 0,
+        num_cryptos: 0,
         cryptos: []
     },
     created: function() {
@@ -53,6 +54,7 @@ new Vue({
                 // Display data
                 that.price = price;
                 that.change_1d = change_1d;
+                that.num_cryptos = res.metadata.num_cryptocurrencies;
                 that.cryptos = res.data.map(function(crypto, index) {
                     return {
                         id: index + 1,
@@ -80,6 +82,9 @@ new Vue({
             });
     },
     methods: {
+        formatNumber(value) {
+            return value.toLocaleString();
+        },
         formatPrice(price) {
             let options = {
                 style: 'currency',

@@ -16,56 +16,53 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div id="app" class="container">
         <div class="centered-block">
             <h1>Cryptocurrency Index Fund</h1>
             <p class="lead">
                 How to turn your cryptocurrency portfolio into a personal index fund.
             </p>
         </div>
-        <div id="app" class="row">
-            <div class="col">
-                <span id="price">
-                    {{ formatPrice(price) }}
-                </span>
-                <span :class="{green: change_1d > 0, red: change_1d < 0}">
-                    ({{ formatPercent(change_1d) }})
-                </span>
-                <p>
-                    A cryptocurrency index fund of the top 10 coins.
-                </p>
-                <div style="position: relative; height:40vh;">
-                    <canvas id="mychart"></canvas>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped table-sm" width="100%">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Symbol</th>
-                                <th scope="col" class="text-right">Price</th>
-                                <th scope="col" class="text-right">Market Cap</th>
-                                <th scope="col" class="text-right">Allocation</th>
-                                <th scope="col" class="text-right">Change (1d)</th>
-                                <th scope="col" class="text-right">Change (7d)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="crypto in cryptos">
-                                <th scope="row">{{ crypto.id }}</th>
-                                <th scope="row">{{ crypto.name }}</td>
-                                <td>{{ crypto.symbol }}</td>
-                                <td class="text-right">{{ formatPrice(crypto.price) }}</td>
-                                <td class="text-right">{{ formatCap(crypto.cap) }}</td>
-                                <td class="text-right">{{ formatAllocation(crypto.allocation ) }}</td>
-                                <td class="text-right" :class="{green: crypto.change1d > 0, red: crypto.change1d < 0}">{{ formatPercent(crypto.change1d) }}</td>
-                                <td class="text-right" :class="{green: crypto.change7d > 0, red: crypto.change7d < 0}">{{ formatPercent(crypto.change7d) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
+        <div>
+            <h2>What to buy</h2>
+            <p>
+                Don't try to own all of the {{ formatNumber(num_cryptos) }} cryptocurrencies.
+                Focus on the top 10, as they represent about 80% of the market.
+            </p>
+        </div>
+
+        <div style="position: relative; height:40vh;">
+            <canvas id="mychart"></canvas>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped table-sm" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Symbol</th>
+                        <th scope="col" class="text-right">Price</th>
+                        <th scope="col" class="text-right">Market Cap</th>
+                        <th scope="col" class="text-right">Allocation</th>
+                        <th scope="col" class="text-right">Change (1d)</th>
+                        <th scope="col" class="text-right">Change (7d)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="crypto in cryptos">
+                        <th scope="row">{{ crypto.id }}</th>
+                        <th scope="row">{{ crypto.name }}</td>
+                        <td>{{ crypto.symbol }}</td>
+                        <td class="text-right">{{ formatPrice(crypto.price) }}</td>
+                        <td class="text-right">{{ formatCap(crypto.cap) }}</td>
+                        <td class="text-right">{{ formatAllocation(crypto.allocation ) }}</td>
+                        <td class="text-right" :class="{green: crypto.change1d > 0, red: crypto.change1d < 0}">{{ formatPercent(crypto.change1d) }}</td>
+                        <td class="text-right" :class="{green: crypto.change7d > 0, red: crypto.change7d < 0}">{{ formatPercent(crypto.change7d) }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
