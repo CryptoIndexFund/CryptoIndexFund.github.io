@@ -75,7 +75,7 @@ new Vue({
             let options = {
                 minimumFractionDigits: decimals
             };
-            return value.toLocaleString();
+            return value.toLocaleString(undefined, options);
         },
         formatPrice(price) {
             let options = {
