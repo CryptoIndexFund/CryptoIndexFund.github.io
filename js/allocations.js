@@ -200,7 +200,6 @@ createChart = function(coins, caps) {
                     tooltips: {
                         callbacks: {
                             title: function(tooltipItem, data) {
-                                console.log(tooltipItem);
                                 let tooltip = tooltipItem[0],
                                     coin = coins[tooltip.datasetIndex - 1] || 'Index',
                                     title = [tooltip.xLabel, coin];
