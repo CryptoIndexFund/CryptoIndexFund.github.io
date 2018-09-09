@@ -89,12 +89,14 @@
                 Market capitalization weighted portfolios like this require very little rebalancing. If one of the smaller cryptocurrencies becomes more valuable, the portfolio allocation will still be market weighted and not require rebalancing. If done right, rebalancing is only needed when a new cryptocurrency enters the top 10. It's simple even in that case to sell the coin that left the top 10 and buy the new coin, with little or not adjustment needed for the other 9.
             </p>
             <form>
-                <label for="assets">Total assets</label>
-                <div class="input-group col-sm-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
+                <div class="form-group row">
+                    <label for="assets" class="col-md-2 col-form-label">Total assets</label>
+                    <div class="input-group col-md-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" id="assets" v-model.number="assets">
                     </div>
-                    <input type="number" class="form-control" id="assets" v-model.number="assets">
                 </div>
             </form>
             <div class="table-responsive">
