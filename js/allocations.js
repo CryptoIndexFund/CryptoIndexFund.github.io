@@ -1,8 +1,6 @@
 new Vue({
     el: "#app",
     data: {
-        price: 10,
-        change_1d: 0,
         num_cryptos: 0,
         cryptos: []
     },
@@ -43,17 +41,7 @@ new Vue({
                     }
                 });
 
-                // Calculate index price and change
-                let SCALING = 2e10,
-                    price = total_cap / SCALING,
-                    change_1d = 0;
-                res.data.forEach(function(obj) {
-                    change_1d += obj.allocation * obj.quotes.USD.percent_change_24h;
-                });
-
                 // Display data
-                that.price = price;
-                that.change_1d = change_1d;
                 that.num_cryptos = res.metadata.num_cryptocurrencies;
                 that.cryptos = res.data.map(function(crypto, index) {
                     return {
