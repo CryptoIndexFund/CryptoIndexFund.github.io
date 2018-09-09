@@ -88,9 +88,17 @@
             <p>
                 Market capitalization weighted portfolios like this require very little rebalancing. If one of the smaller cryptocurrencies becomes more valuable, the portfolio allocation will still be market weighted and not require rebalancing. If done right, rebalancing is only needed when a new cryptocurrency enters the top 10. It's simple even in that case to sell the coin that left the top 10 and buy the new coin, with little or not adjustment needed for the other 9.
             </p>
+            <form>
+                <label for="assets">Total assets</label>
+                <div class="input-group col-sm-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" class="form-control" id="assets" v-model.number="assets">
+                </div>
+            </form>
             <div class="table-responsive">
                 <table class="table table-hover table-striped table-sm" width="100%">
-                    <caption>Amounts to hold for a {{ formatPrice(1000) }} portfolio.</caption>
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -106,8 +114,8 @@
                             <th scope="row">{{ crypto.id }}</th>
                             <th scope="row">{{ crypto.name }}</th>
                             <td>{{ crypto.symbol }}</td>
-                            <td class="text-right">{{ formatNumber(1000 * crypto.allocation / crypto.price, 8) }}</td>
-                            <td class="text-right">{{ formatPrice(1000 * crypto.allocation) }}</td>
+                            <td class="text-right">{{ formatNumber(assets * crypto.allocation / crypto.price, 8) }}</td>
+                            <td class="text-right">{{ formatPrice(assets * crypto.allocation) }}</td>
                             <td class="text-right">{{ formatAllocation(crypto.allocation) }}</td>
                         </tr>
                     </tbody>

@@ -2,7 +2,8 @@ new Vue({
     el: "#app",
     data: {
         num_cryptos: 0,
-        cryptos: []
+        cryptos: [],
+        assets: 1000
     },
     created: function() {
         // Get price data
