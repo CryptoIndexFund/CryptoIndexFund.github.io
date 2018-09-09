@@ -70,7 +70,11 @@ new Vue({
             });
     },
     methods: {
-        formatNumber(value) {
+        formatNumber(value, decimals) {
+            decimals = (typeof decimals !== 'undefined') ?  decimals : 0;
+            let options = {
+                minimumFractionDigits: decimals
+            };
             return value.toLocaleString();
         },
         formatPrice(price) {
