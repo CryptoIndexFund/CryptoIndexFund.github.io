@@ -71,21 +71,21 @@ new Vue({
             });
     },
     methods: {
-        formatNumber(value, decimals) {
+        formatNumber: function(value, decimals) {
             decimals = (typeof decimals !== 'undefined') ?  decimals : 0;
             let options = {
                 minimumFractionDigits: decimals
             };
             return value.toLocaleString(undefined, options);
         },
-        formatPrice(price) {
+        formatPrice: function(price) {
             let options = {
                 style: 'currency',
                 currency: 'USD'
             };
             return price.toLocaleString(undefined, options);
         },
-        formatCap(cap) {
+        formatCap: function(cap) {
             let si = [
                 {value: 1, symbol: ''},
                 {value: 1e3, symbol: 'K'},
@@ -102,10 +102,10 @@ new Vue({
             }
             return this.formatPrice(cap / si[i].value) + ' ' + si[i].symbol;
         },
-        formatPercent(percent) {
+        formatPercent: function(percent) {
             return percent.toFixed(2) + '%';
         },
-        formatAllocation(allocation) {
+        formatAllocation: function(allocation) {
             return this.formatPercent(allocation * 100);
         }
     }
