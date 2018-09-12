@@ -117,7 +117,7 @@
                             <th scope="row">{{ crypto.id }}</th>
                             <th scope="row">{{ crypto.name }}</th>
                             <td>{{ crypto.symbol }}</td>
-                            <td class="text-right">{{ formatNumber(assets * crypto.allocation / crypto.price, 8) }}</td>
+                            <td class="text-right">{{ formatNumber(assets * crypto.allocation / crypto.price, 6) }}</td>
                             <td class="text-right">{{ formatPrice(assets * crypto.allocation) }}</td>
                             <td class="text-right">{{ formatAllocation(crypto.allocation) }}</td>
                         </tr>
