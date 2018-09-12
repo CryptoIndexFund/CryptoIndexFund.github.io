@@ -5,7 +5,7 @@ new Vue({
         cryptos: [],
         assets: 1000
     },
-    created: {
+    created: function() {
         this.queryMarketCaps();
         this.queryHistoricalPrices();
     },
