@@ -7,7 +7,6 @@ new Vue({
     },
     created: function() {
         this.queryMarketCaps();
-        this.queryHistoricalPrices();
     },
     methods: {
         queryMarketCaps: function() {
@@ -61,6 +60,9 @@ new Vue({
                         change7d: crypto.quotes.USD.percent_change_7d
                     };
                 });
+
+                // Query historical data for these cryptocurrencies
+                that.queryHistoricalPrices();
             })
             .catch(function(error) {
                 console.log(error);
