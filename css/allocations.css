@@ -1,6 +1,5 @@
-.centered-block {
-    padding: 3rem 1.5rem;
-    text-align: center;
+header, section {
+  padding: 150px 0;
 }
 
 .red {

@@ -34,98 +34,99 @@
     </nav>
 
     <!-- Page Content -->
-    <div id="app" class="container">
-        <div class="centered-block">
-            <h1>Cryptocurrency Index Fund</h1>
-            <p class="lead">
-                Turn your cryptocurrency portfolio into a personal index fund.
-            </p>
-        </div>
-
-        <div id="what">
-            <h2>What to hold</h2>
-            <p>
-                Don't try to hold all of the {{ formatNumber(num_cryptos) }} cryptocurrencies.
-                Focus on the top 10, as they represent about 80% of the market.
-            </p>
-        </div>
-
-        <div style="position: relative; height:40vh;">
-            <canvas id="mychart"></canvas>
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-hover table-striped table-sm" width="100%">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Symbol</th>
-                        <th scope="col" class="text-right">Price</th>
-                        <th scope="col" class="text-right">Market Cap</th>
-                        <th scope="col" class="text-right">Change (1d)</th>
-                        <th scope="col" class="text-right">Change (7d)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="crypto in cryptos">
-                        <th scope="row">{{ crypto.id }}</th>
-                        <th scope="row">{{ crypto.name }}</th>
-                        <td>{{ crypto.symbol }}</td>
-                        <td class="text-right">{{ formatPrice(crypto.price) }}</td>
-                        <td class="text-right">{{ formatCap(crypto.cap) }}</td>
-                        <td class="text-right" :class="{green: crypto.change1d > 0, red: crypto.change1d < 0}">{{ formatPercent(crypto.change1d) }}</td>
-                        <td class="text-right" :class="{green: crypto.change7d > 0, red: crypto.change7d < 0}">{{ formatPercent(crypto.change7d) }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div id="amounts">
-            <h2>Amounts to hold</h2>
-            <p>
-                What amounts of the top 10 cryptocurrencies should be held? The portfolio allocation should be proportional to market capitalization. This means more of the top cryptocurrencies, while maintaining exposure in the smaller cryptocurrencies.
-            </p>
-            <p>
-                Market capitalization weighted portfolios like this require very little rebalancing. If one of the smaller cryptocurrencies becomes more valuable, the portfolio allocation will still be market weighted and not require rebalancing. If done right, rebalancing is only needed when a new cryptocurrency enters the top 10. It's simple even in that case to sell the coin that left the top 10 and buy the new coin, with little or no adjustment needed for the other 9.
-            </p>
-            <form>
-                <div class="form-group row">
-                    <label for="assets" class="col-md-2 col-form-label">Total assets</label>
-                    <div class="input-group col-md-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        <input type="number" class="form-control" id="assets" v-model.number="assets">
-                    </div>
+    <header class="container text-center">
+        <h1>Cryptocurrency Index Fund</h1>
+        <p class="lead text-muted">
+            Turn your cryptocurrency portfolio into a personal index fund.
+        </p>
+    </header>
+    <main id="app">
+        <section class="bg-light">
+            <div id="what" class="container">
+                <h2>What to hold</h2>
+                <p class="lead">
+                    Don't try to hold all of the {{ formatNumber(num_cryptos) }} cryptocurrencies.
+                    Focus on the top 10, as they represent about 80% of the market.
+                </p>
+                <div style="position: relative; height:50vh;">
+                    <canvas id="mychart"></canvas>
                 </div>
-            </form>
-            <div class="table-responsive">
-                <table class="table table-hover table-striped table-sm" width="100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Symbol</th>
-                            <th scope="col" class="text-right">Amount</th>
-                            <th scope="col" class="text-right">Balance</th>
-                            <th scope="col" class="text-right">Allocation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="crypto in cryptos">
-                            <th scope="row">{{ crypto.id }}</th>
-                            <th scope="row">{{ crypto.name }}</th>
-                            <td>{{ crypto.symbol }}</td>
-                            <td class="text-right">{{ formatNumber(assets * crypto.allocation / crypto.price, 6) }}</td>
-                            <td class="text-right">{{ formatPrice(assets * crypto.allocation) }}</td>
-                            <td class="text-right">{{ formatAllocation(crypto.allocation) }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-sm" width="100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Symbol</th>
+                                <th scope="col" class="text-right">Price</th>
+                                <th scope="col" class="text-right">Market Cap</th>
+                                <th scope="col" class="text-right">Change (1d)</th>
+                                <th scope="col" class="text-right">Change (7d)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="crypto in cryptos">
+                                <th scope="row">{{ crypto.id }}</th>
+                                <th scope="row">{{ crypto.name }}</th>
+                                <td>{{ crypto.symbol }}</td>
+                                <td class="text-right">{{ formatPrice(crypto.price) }}</td>
+                                <td class="text-right">{{ formatCap(crypto.cap) }}</td>
+                                <td class="text-right" :class="{green: crypto.change1d > 0, red: crypto.change1d < 0}">{{ formatPercent(crypto.change1d) }}</td>
+                                <td class="text-right" :class="{green: crypto.change7d > 0, red: crypto.change7d < 0}">{{ formatPercent(crypto.change7d) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <section>
+            <div id="amounts" class="container">
+                <h2>Amounts to hold</h2>
+                <p>
+                    What amounts of the top 10 cryptocurrencies should be held? The portfolio allocation should be proportional to market capitalization. This means more of the top cryptocurrencies, while maintaining exposure in the smaller cryptocurrencies.
+                </p>
+                <p>
+                    Market capitalization weighted portfolios like this require very little rebalancing. If one of the smaller cryptocurrencies becomes more valuable, the portfolio allocation will still be market weighted and not require rebalancing. If done right, rebalancing is only needed when a new cryptocurrency enters the top 10. It's simple even in that case to sell the coin that left the top 10 and buy the new coin, with little or no adjustment needed for the other 9.
+                </p>
+                <form>
+                    <div class="form-group row">
+                        <label for="assets" class="col-md-2 col-form-label">Total assets</label>
+                        <div class="input-group col-md-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" class="form-control" id="assets" v-model.number="assets">
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-sm" width="100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Symbol</th>
+                                <th scope="col" class="text-right">Amount</th>
+                                <th scope="col" class="text-right">Balance</th>
+                                <th scope="col" class="text-right">Allocation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="crypto in cryptos">
+                                <th scope="row">{{ crypto.id }}</th>
+                                <th scope="row">{{ crypto.name }}</th>
+                                <td>{{ crypto.symbol }}</td>
+                                <td class="text-right">{{ formatNumber(assets * crypto.allocation / crypto.price, 6) }}</td>
+                                <td class="text-right">{{ formatPrice(assets * crypto.allocation) }}</td>
+                                <td class="text-right">{{ formatAllocation(crypto.allocation) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer bg-dark">
