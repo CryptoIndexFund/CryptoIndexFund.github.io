@@ -1,32 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Turn your cryptocurrency portfolio into a personal index fund.">
+    <meta name="author" content="">
     <title>Crypto Index Fund</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/allocations.css">
 </head>
-<body>
+<body id="page-top">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Crypto Index Fund</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbarMenu" aria-controls="myNavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Crypto Index Fund</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="myNavbarMenu">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#what">What to hold</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#what">What to hold</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#amounts">Amounts to hold</a>
+                        <a class="nav-link js-scroll-trigger" href="#amounts">Amounts to hold</a>
                     </li>
                 </ul>
             </div>
@@ -34,15 +32,17 @@
     </nav>
 
     <!-- Page Content -->
-    <header class="container text-center">
-        <h1>Cryptocurrency Index Fund</h1>
-        <p class="lead text-muted">
-            Turn your cryptocurrency portfolio into a personal index fund.
-        </p>
+    <header>
+        <div class="container text-center">
+            <h1>Cryptocurrency Index Fund</h1>
+            <p class="lead text-muted">
+                Turn your cryptocurrency portfolio into a personal index fund.
+            </p>
+        </div>
     </header>
     <main id="app">
-        <section class="bg-light">
-            <div id="what" class="container">
+        <section id="what" class="bg-light">
+            <div class="container">
                 <h2>What to hold</h2>
                 <p class="lead">
                     Don't try to hold all of the {{ formatNumber(num_cryptos) }} cryptocurrencies.
@@ -80,8 +80,8 @@
             </div>
         </section>
 
-        <section>
-            <div id="amounts" class="container">
+        <section id="amounts">
+            <div class="container">
                 <h2>Amounts to hold</h2>
                 <p>
                     What amounts of the top 10 cryptocurrencies should be held?
@@ -159,7 +159,11 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
+
+    <!-- Scrolling nav -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="js/scrolling-nav.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
