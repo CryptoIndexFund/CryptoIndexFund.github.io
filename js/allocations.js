@@ -71,16 +71,16 @@ new Vue({
         queryHistoricalPrices: function() {
             const that = this,
                 colors = [
-                    '#8dd3c7',
-                    '#ffffb3',
-                    '#bebada',
-                    '#fb8072',
-                    '#80b1d3',
-                    '#fdb462',
-                    '#b3de69',
-                    '#fccde5',
-                    '#d9d9d9',
-                    '#bc80bd'
+                    'rgba(166,206,227,0.5)',
+                    'rgba(31,120,180,0.5)',
+                    'rgba(178,223,138,0.5)',
+                    'rgba(51,160,44,0.5)',
+                    'rgba(251,154,153,0.5)',
+                    'rgba(227,26,28,0.5)',
+                    'rgba(253,191,111,0.5)',
+                    'rgba(255,127,0,0.5)',
+                    'rgba(202,178,214,0.5)',
+                    'rgba(106,61,154,0.5)'
                 ];
 
             let requests = this.cryptos.map(function(crypto) {
