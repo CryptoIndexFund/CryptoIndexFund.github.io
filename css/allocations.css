@@ -20,7 +20,8 @@ section {
     color: green;
 }
 
-.table td {
+.table td,
+.table th[scope=row] {
     white-space: nowrap;
 }
 
