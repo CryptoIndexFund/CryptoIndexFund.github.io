@@ -94,17 +94,6 @@
                     If done right, rebalancing is only needed when a new cryptocurrency enters the top 10.
                     It's simple even in that case to sell the coin that left the top 10 and buy the new coin, with little or no adjustment needed for the other 9.
                 </p>
-                <form>
-                    <div class="form-group row">
-                        <label for="assets" class="col-md-2 col-form-label">Total assets</label>
-                        <div class="input-group col-md-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                            <input type="number" class="form-control" id="assets" v-model.number="assets">
-                        </div>
-                    </div>
-                </form>
                 <div class="table-responsive">
                     <table class="table table-hover table-striped table-sm" width="100%">
                         <thead>
@@ -112,19 +101,46 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Symbol</th>
-                                <th scope="col" class="text-right">Amount</th>
-                                <th scope="col" class="text-right">Balance</th>
-                                <th scope="col" class="text-right">Allocation</th>
+                                <th scope="col" class="text-right">Current&nbsp;Amount</th>
+                                <th scope="col" class="text-right">Current Balance</th>
+                                <th scope="col" class="text-right">Target Allocation</th>
+                                <th scope="col" class="text-right">Target Amount</th>
+                                <th scope="col" class="text-right">Target Balance</th>
+                                <th scope="col" class="text-right">Buy Amount</th>
+                                <th scope="col" class="text-right">Buy Balance</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="crypto in cryptos">
+                            <tr>
+                                <th scope="row">0</th>
+                                <th scope="row">US Dollars</th>
+                                <td>USD</td>
+                                <td class="text-right"><input type="number" class="form-control form-control-sm text-right" v-model.number="current_amounts[0]"></td>
+                                <td class="text-right">{{ formatPrice(current_balances[0]) }}</td>
+                                <td class="text-right">{{ formatAllocation(0) }}</td>
+                                <td class="text-right">{{ formatNumber(target_amounts[0], 2) }}</td>
+                                <td class="text-right">{{ formatPrice(target_balances[0]) }}</td>
+                                <td class="text-right" :class="{green: buy_amounts[0] > 0, red: buy_amounts[0] < 0}">{{ formatNumber(buy_amounts[0], 2) }}</td>
+                                <td class="text-right" :class="{green: buy_balances[0] > 0, red: buy_balances[0] < 0}">{{ formatPrice(buy_balances[0]) }}</td>
+                            </tr>
+                            <tr v-for="crypto, index in cryptos">
                                 <th scope="row">{{ crypto.id }}</th>
                                 <th scope="row">{{ crypto.name }}</th>
                                 <td>{{ crypto.symbol }}</td>
-                                <td class="text-right">{{ formatNumber(assets * crypto.allocation / crypto.price, 6) }}</td>
-                                <td class="text-right">{{ formatPrice(assets * crypto.allocation) }}</td>
+                                <td class="text-right"><input type="number" class="form-control form-control-sm text-right" v-model.number="current_amounts[index + 1]"></td>
+                                <td class="text-right">{{ formatPrice(current_balances[index + 1]) }}</td>
                                 <td class="text-right">{{ formatAllocation(crypto.allocation) }}</td>
+                                <td class="text-right">{{ formatNumber(target_amounts[index + 1], 6) }}</td>
+                                <td class="text-right">{{ formatPrice(target_balances[index + 1]) }}</td>
+                                <td class="text-right" :class="{green: buy_amounts[index + 1] > 0, red: buy_amounts[index + 1] < 0}">{{ formatNumber(buy_amounts[index + 1], 6) }}</td>
+                                <td class="text-right" :class="{green: buy_balances[index + 1] > 0, red: buy_balances[index + 1] < 0}">{{ formatPrice(buy_balances[index + 1]) }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="4" class="text-right">Total:</th>
+                                <td class="text-right">{{ formatPrice(current_balances_total) }}</td>
+                                <td class="text-right">{{ formatAllocation(allocations_total) }}</td>
+                                <td colspan="2" class="text-right">{{ formatPrice(target_balances_total) }}</td>
+                                <td colspan="2"></td>
                             </tr>
                         </tbody>
                     </table>

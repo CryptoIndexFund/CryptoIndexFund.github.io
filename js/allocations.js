@@ -3,7 +3,66 @@ new Vue({
     data: {
         num_cryptos: 0,
         cryptos: [],
-        assets: 1000
+        current_amounts: [1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    computed: {
+        current_balances: function() {
+            const that = this;
+            return this.current_amounts.map(function(amount, index) {
+                if (index == 0) {
+                    return amount;
+                } else {
+                    if (that.cryptos[index - 1] === undefined) return 0;
+                    let price = that.cryptos[index - 1].price;
+                    return amount * price;
+                }
+            });
+        },
+        current_balances_total: function() {
+            return this.current_balances.reduce(function(total, balance) {
+                return total + balance;
+            });
+        },
+        allocations_total: function() {
+            return this.cryptos.reduce(function(total, crypto) {
+                return total + crypto.allocation;
+            }, 0);
+        },
+        target_amounts: function() {
+            const that = this;
+            let amounts = [0];
+            this.target_balances.forEach(function(balance, index) {
+                if (that.cryptos[index - 1] === undefined) return 0;
+                let price = that.cryptos[index - 1].price;
+                amounts.push(balance / price);
+            });
+            return amounts;
+        },
+        target_balances: function() {
+            const that = this;
+            let balances = [0];
+            this.cryptos.forEach(function(crypto) {
+                balances.push(that.current_balances_total * crypto.allocation);
+            });
+            return balances;
+        },
+        target_balances_total: function() {
+            return this.target_balances.reduce(function(total, balance) {
+                return total + balance;
+            });
+        },
+        buy_amounts: function() {
+            const that = this;
+            return this.current_amounts.map(function(amount, index) {
+                return that.target_amounts[index] - amount;
+            });
+        },
+        buy_balances: function() {
+            const that = this;
+            return this.current_balances.map(function(balance, index) {
+                return that.target_balances[index] - balance;
+            });
+        }
     },
     created: function() {
         this.queryMarketCaps();
