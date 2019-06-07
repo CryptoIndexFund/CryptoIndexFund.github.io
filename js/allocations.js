@@ -5,6 +5,22 @@ new Vue({
         cryptos: [],
         current_amounts: [1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
+    mounted() {
+        old_amounts = localStorage.getItem('current_amounts')
+        if (old_amounts) {
+            try {
+                this.current_amounts = JSON.parse(old_amounts);
+            } catch(e) {
+                localStorage.removeItem('current_amounts');
+            }
+        }
+    },
+    watch: {
+        current_amounts(new_amounts) {
+            const parsed = JSON.stringify(new_amounts);
+            localStorage.setItem('current_amounts', parsed);
+        }
+    },
     computed: {
         current_balances: function() {
             const that = this;
