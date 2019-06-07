@@ -147,7 +147,7 @@ new Vue({
                 if (symbol == 'MIOTA') {
                     symbol = 'IOTA';
                 }
-                let url = 'https://min-api.cryptocompare.com/data/histoday?fsym=' + symbol + '&tsym=USD&limit=30&e=CCCAGG&extraParams=CryptoIndexFund';
+                let url = 'https://min-api.cryptocompare.com/data/histoday?fsym=' + symbol + '&tsym=USD&limit=90&e=CCCAGG&extraParams=CryptoIndexFund';
                 return fetch(url).then(function(response) {
                     return response.json();
                 });
