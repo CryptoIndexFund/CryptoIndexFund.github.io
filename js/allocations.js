@@ -6,7 +6,7 @@ new Vue({
         current_amounts: [1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         current_assets: ["USD"]
     },
-    mounted() {
+    mounted: function() {
         old_amounts = localStorage.getItem('current_amounts');
         if (old_amounts) {
             try {
