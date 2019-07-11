@@ -25,11 +25,11 @@ new Vue({
         }
     },
     watch: {
-        current_amounts(new_amounts) {
+        current_amounts: function(new_amounts) {
             const parsed = JSON.stringify(new_amounts);
             localStorage.setItem('current_amounts', parsed);
         },
-        current_assets(new_assets) {
+        current_assets: function(new_assets) {
             const parsed = JSON.stringify(new_assets);
             localStorage.setItem('current_assets', parsed);
         }
