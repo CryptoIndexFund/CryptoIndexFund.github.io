@@ -3,10 +3,11 @@ new Vue({
     data: {
         num_cryptos: 0,
         cryptos: [],
-        current_amounts: [1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        current_amounts: [1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        current_assets: ["USD"]
     },
     mounted() {
-        old_amounts = localStorage.getItem('current_amounts')
+        old_amounts = localStorage.getItem('current_amounts');
         if (old_amounts) {
             try {
                 this.current_amounts = JSON.parse(old_amounts);
@@ -14,11 +15,23 @@ new Vue({
                 localStorage.removeItem('current_amounts');
             }
         }
+        old_assets = localStorage.getItem('current_assets');
+        if (old_assets) {
+            try {
+                this.current_assets = JSON.parse(old_assets);
+            } catch(e) {
+                localStorage.removeItem('current_assets');
+            }
+        }
     },
     watch: {
         current_amounts(new_amounts) {
             const parsed = JSON.stringify(new_amounts);
             localStorage.setItem('current_amounts', parsed);
+        },
+        current_assets(new_assets) {
+            const parsed = JSON.stringify(new_assets);
+            localStorage.setItem('current_assets', parsed);
         }
     },
     computed: {
@@ -135,6 +148,19 @@ new Vue({
                             change7d: crypto.quotes.USD.percent_change_7d
                         };
                     });
+
+                    // Update current_amounts, based on cryptos order
+                    let new_amounts = [that.current_amounts[0], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    let new_assets = ['USD'];
+                    that.cryptos.forEach(function(crypto, index) {
+                        let i = that.current_assets.indexOf(crypto.symbol);
+                        if (i !== -1) {
+                            new_amounts[index] = that.current_amounts[i];
+                        }
+                        new_assets.push(crypto.symbol);
+                    });
+                    that.current_amounts = new_amounts;
+                    that.current_assets = new_assets;
 
                     // Query historical data for these cryptocurrencies
                     that.queryHistoricalPrices();
