@@ -150,12 +150,12 @@ new Vue({
                     });
 
                     // Update current_amounts, based on cryptos order
-                    let new_amounts = [that.current_amounts[0]];
+                    let new_amounts = [that.current_amounts[0], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                     let new_assets = ['USD'];
                     that.cryptos.forEach(function(crypto, index) {
                         let i = that.current_assets.indexOf(crypto.symbol);
                         if (i !== -1) {
-                            new_amounts.push(that.current_amounts[i]);
+                            new_amounts[index + 1] = that.current_amounts[i];
                         }
                         new_assets.push(crypto.symbol);
                     });
