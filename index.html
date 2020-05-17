@@ -54,7 +54,7 @@
             <div class="container">
                 <h2>What to hold</h2>
                 <p class="lead">
-                    Don't try to hold all of the {{ formatNumber(num_cryptos) }} cryptocurrencies.
+                    Don't try to hold all of the 5000+ cryptocurrencies.
                     Focus on the top 10, as they represent about 80% of the market.
                 </p>
                 <div style="position: relative; height:50vh;">
@@ -70,7 +70,6 @@
                                 <th scope="col" class="text-right">Price</th>
                                 <th scope="col" class="text-right">Market Cap</th>
                                 <th scope="col" class="text-right">Change (1d)</th>
-                                <th scope="col" class="text-right">Change (7d)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,7 +80,6 @@
                                 <td class="text-right">{{ formatPrice(crypto.price) }}</td>
                                 <td class="text-right">{{ formatCap(crypto.cap) }}</td>
                                 <td class="text-right" :class="{green: crypto.change1d > 0, red: crypto.change1d < 0}">{{ formatPercent(crypto.change1d) }}</td>
-                                <td class="text-right" :class="{green: crypto.change7d > 0, red: crypto.change7d < 0}">{{ formatPercent(crypto.change7d) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -166,7 +164,7 @@
     <footer class="footer bg-dark">
         <div class="container">
             <div class="text-muted">Historical prices from <a href="https://www.cryptocompare.com">cryptocompare.com</a>.</div>
-            <div class="text-muted">Current prices and market capitalizations from <a href="https://www.coinmarketcap.com">coinmarketcap.com</a>.</div>
+            <div class="text-muted">Current prices and market capitalizations from <a href="https://www.coingecko.com">CoinGecko.com</a>.</div>
             <a class="github-button" href="https://github.com/CryptoIndexFund/CryptoIndexFund.github.io" aria-label="View CryptoIndexFund on GitHub">View on GitHub</a>
             <div class="form-inline">
                 <div id="donate-btc"></div>
