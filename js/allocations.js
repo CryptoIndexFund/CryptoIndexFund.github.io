@@ -1,7 +1,6 @@
 new Vue({
     el: "#app",
     data: {
-        num_cryptos: 0,
         cryptos: [],
         current_amounts: [1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         current_assets: ["USD"]
@@ -102,7 +101,7 @@ new Vue({
             const that = this,
                 skip_symbols = new Set(['USDT', 'BNB', 'OMG']),
                 n_symbols = 10 + skip_symbols.size,
-                url = 'https://api.coinmarketcap.com/v2/ticker/?limit=' + n_symbols + '&structure=array';
+                url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=' + n_symbols;
             fetch(url)
                 .then(function(data) {
                     return data.json();
@@ -111,22 +110,22 @@ new Vue({
                     // Skip symbols
                     let i = n_symbols;
                     while (i--) {
-                        if (skip_symbols.has(res.data[i].symbol)) {
-                            res.data.splice(i, 1);
+                        if (skip_symbols.has(res[i].symbol.toUpperCase())) {
+                            res.splice(i, 1);
                         }
                     }
 
                     // Slice to 10
-                    res.data = res.data.slice(0, 10);
+                    res = res.slice(0, 10);
 
                     // Calculate total market cap
-                    let total_cap = res.data.reduce(function(acc, obj) {
-                        return acc + obj.quotes.USD.market_cap;
+                    let total_cap = res.reduce(function(acc, obj) {
+                        return acc + obj.market_cap;
                     }, 0);
 
                     // Calculate index allocation
-                    res.data.forEach(function(obj) {
-                        obj.allocation = obj.quotes.USD.market_cap / total_cap;
+                    res.forEach(function(obj) {
+                        obj.allocation = obj.market_cap / total_cap;
 
                         // Fix some names
                         if (obj.name == 'XRP') {
@@ -135,17 +134,15 @@ new Vue({
                     });
 
                     // Display data
-                    that.num_cryptos = res.metadata.num_cryptocurrencies;
-                    that.cryptos = res.data.map(function(crypto, index) {
+                    that.cryptos = res.map(function(crypto, index) {
                         return {
                             id: index + 1,
                             name: crypto.name,
-                            symbol: crypto.symbol,
-                            price: crypto.quotes.USD.price,
-                            cap: crypto.quotes.USD.market_cap,
+                            symbol: crypto.symbol.toUpperCase(),
+                            price: crypto.current_price,
+                            cap: crypto.market_cap,
                             allocation: crypto.allocation,
-                            change1d: crypto.quotes.USD.percent_change_24h,
-                            change7d: crypto.quotes.USD.percent_change_7d
+                            change1d: crypto.market_cap_change_percentage_24h
                         };
                     });
 
