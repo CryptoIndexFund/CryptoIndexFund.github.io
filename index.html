@@ -70,6 +70,7 @@
                                 <th scope="col" class="text-right">Price</th>
                                 <th scope="col" class="text-right">Market Cap</th>
                                 <th scope="col" class="text-right">Change (1d)</th>
+                                <th scope="col" class="text-right">Change (7d)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,6 +81,7 @@
                                 <td class="text-right">{{ formatPrice(crypto.price) }}</td>
                                 <td class="text-right">{{ formatCap(crypto.cap) }}</td>
                                 <td class="text-right" :class="{green: crypto.change1d > 0, red: crypto.change1d < 0}">{{ formatPercent(crypto.change1d) }}</td>
+                                <td class="text-right" :class="{green: crypto.change7d > 0, red: crypto.change7d < 0}">{{ formatPercent(crypto.change7d) }}</td>
                             </tr>
                         </tbody>
                     </table>
