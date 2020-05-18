@@ -101,7 +101,7 @@ new Vue({
             const that = this,
                 skip_symbols = new Set(['USDT', 'BNB', 'OMG']),
                 n_symbols = 10 + skip_symbols.size,
-                url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=' + n_symbols;
+                url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&price_change_percentage=24h%2C7d&per_page=' + n_symbols;
             fetch(url)
                 .then(function(data) {
                     return data.json();
@@ -142,7 +142,8 @@ new Vue({
                             price: crypto.current_price,
                             cap: crypto.market_cap,
                             allocation: crypto.allocation,
-                            change1d: crypto.market_cap_change_percentage_24h
+                            change1d: crypto.price_change_percentage_24h_in_currency,
+                            change7d: crypto.price_change_percentage_7d_in_currency
                         };
                     });
 
