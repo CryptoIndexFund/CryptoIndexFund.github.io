@@ -99,7 +99,7 @@ new Vue({
         queryMarketCaps: function() {
             // Get price data
             const that = this,
-                skip_symbols = new Set(['USDT', 'BNB', 'OMG']),
+                skip_symbols = new Set(['USDT', 'BNB', 'OMG', 'USDC']),
                 n_symbols = 10 + skip_symbols.size,
                 url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&price_change_percentage=24h%2C7d&per_page=' + n_symbols;
             fetch(url)
