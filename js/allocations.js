@@ -110,7 +110,8 @@ new Vue({
                         'USDC',
                         'USDS',
                         'USDT',
-                        'UST'
+                        'UST',
+                        'WSTETH'
                     ]
                 ),
                 n_symbols = 10 + skip_symbols.size,
