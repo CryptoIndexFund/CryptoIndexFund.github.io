@@ -196,7 +196,7 @@ new Vue({
                     'rgba(106,61,154,0.5)'
                 ];
 
-            const slowFetch = rateLimit1(fetch, 1000 / 5);
+            const slowFetch = rateLimit1(fetch, 1000 / 5.1);
             let requests = this.cryptos.map(function(crypto) {
                 let symbol = crypto.symbol;
                 if (symbol == 'MIOTA') {
