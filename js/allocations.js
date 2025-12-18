@@ -196,13 +196,14 @@ new Vue({
                     'rgba(106,61,154,0.5)'
                 ];
 
+            const slowFetch = rateLimit1(fetch, 1000 / 5);
             let requests = this.cryptos.map(function(crypto) {
                 let symbol = crypto.symbol;
                 if (symbol == 'MIOTA') {
                     symbol = 'IOTA';
                 }
                 let url = 'https://min-api.cryptocompare.com/data/histoday?fsym=' + symbol + '&tsym=USD&limit=90&e=CCCAGG&extraParams=CryptoIndexFund';
-                return fetch(url).then(function(response) {
+                return slowFetch(url).then(function(response) {
                     return response.json();
                 });
             });
